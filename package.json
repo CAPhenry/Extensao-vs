@@ -2,9 +2,14 @@
   "name": "henry-snippets",
   "displayName": "Henry-snippets",
   "description": "Apenas uma extensão para ajudar no desenvolvimento de scripts!",
+  "publisher": "HenryBotelho",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.92.0"
+  },
+  "author":{
+    "name": "Henry",
+    "discord":"_henry0"
   },
   "icon": "logo.jpg",
   "categories": [
