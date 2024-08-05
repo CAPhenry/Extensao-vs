@@ -1,0 +1,42 @@
+{
+	"Criar template vue": {
+		"prefix": "hrvue",
+		"body": [
+			"",
+			"var app = new Vue ({",
+			"    el: '#app',",
+			"",
+			"    data: {",
+			"        show: false,",
+			"    },",
+			"    ",
+			"    methods: {",
+			"        AbrirMenu(){",
+			"            this.show = true",
+			"        },",
+			"    },",
+			"",
+			"    computed: {",
+			"    },",
+			"",
+			"    mounted(){",
+			"        $(document).on('keydown', function(event) {",
+			"            if(event.keyCode === 27){",
+			"                $.post(`https://${GetParentResourceName()}/FecharMenu`,JSON.stringify({}))",
+			"            } ",
+			"        });",
+			"",
+			"",
+			"        ",
+			"        window.addEventListener('message', ({data}) => {",
+			"            if (!data) return",
+			"            const [name,...args] = data;",
+			"            if (!app[name]) return",
+			"            app[name](...args)",
+			"        })",
+			"    }",
+			"});"
+		],
+		"description": "Criar template vue para scripts"
+	}
+}

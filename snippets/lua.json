@@ -1,0 +1,277 @@
+{
+    "Chamar callback do server-side": {
+        "prefix": "hrtcs",
+        "body": [
+            "HR.TriggerClientCallback('ChangeEu',source, function(data)",
+            "    print(data)",
+            "end)"
+        ],
+        "description": "Chamar callback do server-side"
+    },
+    "Chamar callback do client-side": {
+        "prefix": "hrtcc",
+        "body": [
+            "HR.TriggerCallback('ChangeEu', function(data)",
+            "    print(data)",
+            "end)"
+        ],
+        "description": "Chamar callback do client-side"
+    },
+
+    "Registrar callback client-side": {
+        "prefix": "hrrcc",
+        "body": [
+            "HR.CreateClientCallback('ChangeEu', function(cb)",
+            "    local data = nil",
+            "    cb(data)"  ,
+            "end)"
+        ],
+        "description": "Registrar callback client-side"
+    },
+    "Registrar callback server-side": {
+        "prefix": "hrrcs",
+        "body": [
+            "HR.CreateCallback('ChangeEu', function(source, cb)",
+            "    local data = nil",
+            "    cb(data)",
+            "end)"
+        ],
+        "description": "Registrar callback server-side"
+    },
+    "Criar callback client": {
+        "prefix": "hrcbc",
+        "body": [
+            "HR = {}",
+            "HR.ClientRegisterCallbacks = {}",
+            "HR.ServerRegisterCallbacks = {}",
+            "",
+            "RegisterNetEvent('HR:Client:TriggerClientCallback', function(name, ...)",
+            "    HR.TriggerClientCallback(name, function(...)",
+            "        TriggerServerEvent('HR:Server:TriggerClientCallback', name, ...)",
+            "    end, ...)",
+            "end)",
+            "",
+            "RegisterNetEvent('HR:Client:TriggerCallback', function(name, ...)",
+            "    if HR.ServerRegisterCallbacks[name] then",
+            "        HR.ServerRegisterCallbacks[name](...)",
+            "        HR.ServerRegisterCallbacks[name] = nil",
+            "    end",
+            "end)",
+            "",
+            "HR.CreateClientCallback = function(name, cb)",
+            "    HR.ClientRegisterCallbacks[name] = cb",
+            "end",
+            "",
+            "HR.TriggerClientCallback = function(name, cb, ...)",
+            "    if not HR.ClientRegisterCallbacks[name] then return end",
+            "    HR.ClientRegisterCallbacks[name](cb, ...)",
+            "end",
+            "",
+            "HR.TriggerCallback = function(name, cb, ...)",
+            "    HR.ServerRegisterCallbacks[name] = cb",
+            "    TriggerServerEvent('HR:Server:TriggerCallback', name, ...)",
+            "end"
+        ],
+        "description": "Criar sistema de callback no client-side"
+    },
+    "Criar callback server": {
+        "prefix": "hrcbs",
+        "body": [
+            "HR = {}",
+            "HR.ClientRegisterCallbacks = {}",
+            "HR.ServerRegisterCallbacks = {}",
+            "",
+            "RegisterNetEvent('HR:Server:TriggerClientCallback', function(name, ...)",
+            "    if HR.ClientRegisterCallbacks[name] then",
+            "        HR.ClientRegisterCallbacks[name](...)",
+            "        HR.ClientRegisterCallbacks[name] = nil",
+            "    end",
+            "end)",
+            "",
+            "RegisterNetEvent('HR:Server:TriggerCallback', function(name, ...)",
+            "    local src = source",
+            "    HR.TriggerCallback(name, src, function(...)",
+            "        TriggerClientEvent('HR:Client:TriggerCallback', src, name, ...)",
+            "    end, ...)",
+            "end)",
+            "",
+            "HR.TriggerClientCallback = function(name, source, cb, ...)",
+            "    HR.ClientRegisterCallbacks[name] = cb",
+            "    TriggerClientEvent('HR:Client:TriggerClientCallback', source, name, ...)",
+            "end",
+            "",
+            "HR.CreateCallback = function(name, cb)",
+            "    HR.ServerRegisterCallbacks[name] = cb",
+            "end",
+            "",
+            "HR.TriggerCallback = function(name, source, cb, ...)",
+            "    if not HR.ServerRegisterCallbacks[name] then return end",
+            "    HR.ServerRegisterCallbacks[name](source, cb, ...)",
+            "end"
+        ],
+        "description": "Criar sistema de callback no server-side"
+    },
+
+    "Criar template de funcao": {
+        "prefix": "hrfunc",
+        "body": [
+            "ChengeEu = function()",
+            "",
+            "",
+            "",
+            "",
+            "end"
+        ],
+        "description": "Criar template de funcao"
+    },
+    "Comando no server-side": {
+        "prefix": "hrcs",
+        "body": [
+            "RegisterCommand('Command', function(source, args, rawCommand)",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "end)"
+        ],
+        "description": "Criar Comando no server-side"
+    },
+    "Comando no client-side": {
+        "prefix": "hrcc",
+        "body": [
+            "RegisterCommand('Command', function(_, args, rawCommand)",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "end)"
+        ],
+        "description": "Criar Comando no client-side"
+    },
+    "Fxmanifest fivem com nui": {
+        "prefix": "hrffxnui",
+        "body": [
+            "fx_version 'bodacious'",
+            "games { 'gta5' }",
+            "",
+            "lua54 'yes'",
+            "",
+            "files {",
+            "    'nui/**',",
+            "}",
+            "",
+            "ui_page 'nui/index.html'",
+            "",
+            "shared_files {",
+            "    'config.lua',",
+            "}",
+            "",
+            "client_scripts {",
+            "    'client/*.lua'",
+            "}",
+            "",
+            "server_scripts {",
+            "    'server/*.lua'",
+            "}"
+        ],
+        "description": "Criar fxmanifest para red-m sem nui"
+    },
+    "Fxmanifest fivem": {
+        "prefix": "hrffx",
+        "body": [
+            "fx_version 'bodacious'",
+            "games { 'gta5' }",
+            "",
+            "lua54 'yes'",
+            "",
+            "shared_files {",
+            "    'config.lua',",
+            "}",
+            "",
+            "client_scripts {",
+            "    'client/*.lua'",
+            "}",
+            "",
+            "server_scripts {",
+            "    'server/*.lua'",
+            "}"
+        ],
+        "description": "Criar fxmanifest para red-m sem nui"
+    },
+    "Fxmanifest redm com nui": {
+        "prefix": "hrrfxnui",
+        "body": [
+            "fx_version 'bodacious'",
+            "games { 'rdr3' }",
+            "rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'",
+            "",
+            "lua54 'yes'",
+            "",
+            "files {",
+            "    'nui/**',",
+            "}",
+            "",
+            "ui_page 'nui/index.html'",
+            "",
+            "shared_files {",
+            "    'config.lua',",
+            "}",
+            "",
+            "client_scripts {",
+            "    'client/*.lua'",
+            "}",
+            "",
+            "server_scripts {",
+            "    'server/*.lua'",
+            "}"
+        ],
+        "description": "Criar fxmanifest para red-m sem nui"
+    },
+    "Fxmanifest redm": {
+        "prefix": "hrrfx",
+        "body": [
+            "fx_version 'bodacious'",
+            "games { 'rdr3' }",
+            "rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'",
+            "",
+            "lua54 'yes'",
+            "",
+            "shared_files {",
+            "    'config.lua',",
+            "}",
+            "",
+            "client_scripts {",
+            "    'client/*.lua'",
+            "}",
+            "",
+            "server_scripts {",
+            "    'server/*.lua'",
+            "}"
+        ],
+        "description": "Criar fxmanifest para red-m sem nui"
+    },
+    "Thread's": {
+        "prefix": "hrtread",
+        "body": [
+            "Citizen.CreateThread(function()",
+            "    while true do",
+            "        local time = 2000",
+            "",
+            "        Citizen.Wait(time)",
+            "    end",
+            "end)"
+        ],
+        "description": "Criar uma thread no lua para scripts"
+    },
+    "Function Definition": {
+        "prefix": "func",
+        "body": [
+            "function ${1:name}(${2:parameters})",
+            "\t${3:-- body}",
+            "end"
+        ],
+        "description": "Define a function"
+    }
+}
