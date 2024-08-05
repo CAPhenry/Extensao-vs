@@ -6,18 +6,13 @@
   "engines": {
     "vscode": "^1.92.0"
   },
+  "icon": "logo.jpg",
   "categories": [
-    "Other"
+    "Snippets"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "henry-snippets.helloWorld",
-        "title": "Hello World"
-      }
-    ],
     "snippets": [
         {
             "language": "lua",
