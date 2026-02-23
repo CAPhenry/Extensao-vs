@@ -22,7 +22,7 @@
 			"    mounted(){",
 			"        $(document).on('keydown', function(event) {",
 			"            if(event.keyCode === 27){",
-			"                $.post(`https://${GetParentResourceName()}/FecharMenu`,JSON.stringify({}))",
+			"                post(`https://${GetParentResourceName()}/FecharMenu`,JSON.stringify({}))",
 			"            } ",
 			"        });",
 			"",
@@ -35,7 +35,14 @@
 			"            app[name](...args)",
 			"        })",
 			"    }",
-			"});"
+			"});",
+			"const post = (url, data) => {",
+			"    fetch(url, {",
+			"        method: 'POST',",
+			"        headers: { 'Content-Type': 'application/json; charset=UTF-8' },",
+			"        body: JSON.stringify(data)",
+			"    }).catch(err => console.error('Fetch error:', err));",
+			"};"
 		],
 		"description": "Criar template vue para scripts"
 	}

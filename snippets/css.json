@@ -1,0 +1,18 @@
+{
+	"CSS Reset Básico": {
+		"prefix": "css-reset",
+		"body": [
+			"* {",
+			"\tmargin: 0;",
+			"\tpadding: 0;",
+			"\tbox-sizing: border-box;",
+			"}",
+			"",
+			"body {",
+			"\twidth: 100vw;",
+			"\theight: 100vh;",
+			"}"
+		],
+		"description": "Reset CSS básico com margin e padding zerados, box-sizing border-box e body com 100vw/vh"
+	}
+}
