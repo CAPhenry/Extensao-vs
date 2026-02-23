@@ -10,3 +10,24 @@ Primeira versão com alguns comandos.
 
 
 **Tchau!!**
+
+
+
+
+
+
+
+
+Abre o VS Code
+
+Aperta Ctrl + Shift + P
+
+Digita:
+
+Snippets: Configure User Snippets
+
+Escolhe:
+
+css.json (se quiser só pra CSS)
+
+ou New Global Snippets file (pra todos os arquivos)
